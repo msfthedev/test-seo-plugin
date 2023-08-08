@@ -4,15 +4,15 @@
  *
  * This file contains the Crawler class responsible for website crawling and link extraction.
  *
- * @package MsfTheDev\TestSeoPlugin\Crawl
+ * @package Rocket\TestSeoPlugin\Crawl
  */
 
-namespace MsfTheDev\TestSeoPlugin\Crawl;
+namespace Rocket\TestSeoPlugin\Crawl;
 
-require_once MSFTHEDEV_TEST_SEO_PLUGIN_ROOT . 'vendor/autoload.php';
+require_once ROCKET_TEST_SEO_PLUGIN_ROOT . 'vendor/autoload.php';
 
 use Goutte\Client;
-use MsfTheDev\TestSeoPlugin\Factory;
+use Rocket\TestSeoPlugin\Factory;
 
 /**
  * Class Crawler
@@ -68,7 +68,7 @@ class Crawler {
 		$client  = new Client();
 		$crawler = $client->request( 'GET', $url );
 
-		$internal_links = array();
+		$internal_links = [];
 
 		// Extract internal links from anchor tags.
 		$crawler->filter( 'a' )->each(
@@ -117,7 +117,7 @@ class Crawler {
 		$content = $crawler->html();
 
 		// Save as .html file.
-		$file_path = MSFTHEDEV_TEST_SEO_PLUGIN_ROOT . 'output/homepage.html';
+		$file_path = ROCKET_TEST_SEO_PLUGIN_ROOT . 'output/homepage.html';
 		if ( $wp_filesystem->put_contents( $file_path, $content, FS_CHMOD_FILE ) ) {
 			return true;
 		}
@@ -142,7 +142,7 @@ class Crawler {
 		$sitemap_content .= '</ul>';
 
 		// Save as sitemap.html.
-		$file_path = MSFTHEDEV_TEST_SEO_PLUGIN_ROOT . 'output/sitemap.html';
+		$file_path = ROCKET_TEST_SEO_PLUGIN_ROOT . 'output/sitemap.html';
 		if ( $wp_filesystem->put_contents( $file_path, $sitemap_content, FS_CHMOD_FILE ) ) {
 			return true;
 		}

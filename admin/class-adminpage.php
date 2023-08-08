@@ -4,13 +4,13 @@
  *
  * This file contains the AdminPage class responsible for running on-demand crawl and displaying crawled links.
  *
- * @package MsfTheDev\TestSeoPlugin\Admin
+ * @package Rocket\TestSeoPlugin\Admin
  */
 
-namespace MsfTheDev\TestSeoPlugin\Admin;
+namespace Rocket\TestSeoPlugin\Admin;
 
-use MsfTheDev\TestSeoPlugin\Factory;
-use MsfTheDev\TestSeoPlugin\Crawl\Crawler;
+use Rocket\TestSeoPlugin\Factory;
+use Rocket\TestSeoPlugin\Crawl\Crawler;
 
 /**
  * Class AdminPage
@@ -47,7 +47,7 @@ class AdminPage {
 	 * Display the admin page content.
 	 */
 	public function show_admin_page() {
-		include_once MSFTHEDEV_TEST_SEO_PLUGIN_ROOT . 'crawler/class-crawler.php';
+		include_once ROCKET_TEST_SEO_PLUGIN_ROOT . 'crawler/class-crawler.php';
 		$crawler = new Crawler();
 		?>
 		<div class="wrap">

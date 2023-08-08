@@ -4,21 +4,21 @@
  *
  * This file defines the Factory class, responsible for creating and managing objects.
  *
- * @package MsfTheDev\TestSeoPlugin
+ * @package Rocket\TestSeoPlugin
  * @since   1.0.0
  */
 
-namespace MsfTheDev\TestSeoPlugin;
+namespace Rocket\TestSeoPlugin;
 
-require_once MSFTHEDEV_TEST_SEO_PLUGIN_ROOT . 'database/class-databasemanager.php';
-use MsfTheDev\TestSeoPlugin\Database\DatabaseManager;
+require_once ROCKET_TEST_SEO_PLUGIN_ROOT . 'database/class-databasemanager.php';
+use Rocket\TestSeoPlugin\Database\DatabaseManager;
 
 /**
  * Factory class.
  *
  * This class provides methods for creating and managing objects.
  *
- * @package MsfTheDev\TestSeoPlugin
+ * @package Rocket\TestSeoPlugin
  * @since   1.0.0
  */
 class Factory {

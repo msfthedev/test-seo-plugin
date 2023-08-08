@@ -4,18 +4,18 @@
  *
  * This file defines the DatabaseManager class, responsible for managing database interactions.
  *
- * @package MsfTheDev\TestSeoPlugin\Database
+ * @package Rocket\TestSeoPlugin\Database
  * @since   1.0.0
  */
 
-namespace MsfTheDev\TestSeoPlugin\Database;
+namespace Rocket\TestSeoPlugin\Database;
 
 /**
  * DatabaseManager class.
  *
  * This class provides methods for managing database interactions related to crawling results.
  *
- * @package MsfTheDev\TestSeoPlugin\Database
+ * @package Rocket\TestSeoPlugin\Database
  * @since   1.0.0
  */
 class DatabaseManager {

@@ -2,7 +2,7 @@
 /**
  * Test plugin to crawl links.
  *
- * @package MsfTheDev\TestSeoPlugin
+ * @package Rocket\TestSeoPlugin
  *
  * Plugin Name: Test SEO Plugin
  * Description: A plugin to improve SEO by crawling internal links.
@@ -10,22 +10,22 @@
  * Author: Muhammad Saeed
  */
 
-namespace MsfTheDev\TestSeoPlugin;
+namespace Rocket\TestSeoPlugin;
 
-define( 'MSFTHEDEV_TEST_SEO_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
+define( 'ROCKET_TEST_SEO_PLUGIN_ROOT', plugin_dir_path( __FILE__ ) );
 
-use MsfTheDev\TestSeoPlugin\Admin\AdminPage;
-use MsfTheDev\TestSeoPlugin\Crawl\Crawler;
+use Rocket\TestSeoPlugin\Admin\AdminPage;
+use Rocket\TestSeoPlugin\Crawl\Crawler;
 
 require_once plugin_dir_path( __FILE__ ) . 'class-factory.php';
-use MsfTheDev\TestSeoPlugin\Factory;
+use Rocket\TestSeoPlugin\Factory;
 
 /**
  * Class TestSeoPlugin
  *
  * This class defines and initializes the Test SEO Plugin.
  *
- * @package MsfTheDev\TestSeoPlugin
+ * @package Rocket\TestSeoPlugin
  * @since   1.0.0
  */
 class TestSeoPlugin {
@@ -46,24 +46,24 @@ class TestSeoPlugin {
 	 */
 	public function __construct() {
 		// Activation and Deactivation Hooks.
-		register_activation_hook( __FILE__, array( $this, 'activate' ) );
-		register_deactivation_hook( __FILE__, array( $this, 'deactivate' ) );
+		register_activation_hook( __FILE__, [ $this, 'activate' ] );
+		register_deactivation_hook( __FILE__, [ $this, 'deactivate' ] );
 
 		// Hook to add admin menu.
-		add_action( 'admin_menu', array( $this, 'add_admin_page' ) );
+		add_action( 'admin_menu', [ $this, 'add_admin_page' ] );
 
 		// Schedule the crawlWebsite event to run hourly.
 		if ( ! wp_next_scheduled( 'crawl_website_event' ) ) {
 			wp_schedule_event( time(), 'hour', 'crawl_website_event' );
 		}
-		add_action( 'crawl_website_event', array( $this, 'crawl_website_callback' ) );
+		add_action( 'crawl_website_event', [ $this, 'crawl_website_callback' ] );
 	}
 
 	/**
 	 * Callback function to be executed when the event is triggered
 	 */
 	public function crawl_website_callback() {
-		include_once MSFTHEDEV_TEST_SEO_PLUGIN_ROOT . 'crawler/crawler.php';
+		include_once ROCKET_TEST_SEO_PLUGIN_ROOT . 'crawler/crawler.php';
 		$crawler = new Crawler();
 
 		$home_page_url = get_home_url();
@@ -93,7 +93,7 @@ class TestSeoPlugin {
 			'Test SEO',
 			'manage_options',
 			'test-seo-plugin',
-			array( $this, 'render_admin_page' )
+			[ $this, 'render_admin_page' ]
 		);
 	}
 
@@ -109,4 +109,4 @@ class TestSeoPlugin {
 }
 
 // Initialize the plugin.
-$msfthedev_test_seo_plugin = new TestSeoPlugin();
+$rocket_test_seo_plugin = new TestSeoPlugin();
