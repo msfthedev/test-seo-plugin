@@ -63,13 +63,13 @@ class DatabaseManager {
 		$cached_links = wp_cache_get( 'stored_links', 'test_seo_plugin_cache_group' );
 
 		if ( false !== $cached_links ) {
+			echo 'OK. The links are found in cache<br>';
 			return $cached_links;
 		}
 
 		global $wpdb;
 
-		$query = $wpdb->prepare( 'SELECT link FROM %s', $this->crawl_table );
-		$links = $wpdb->get_col( $query ); // @codingStandardsIgnoreLine
+		$links = $wpdb->get_col( "SELECT `link` FROM {$wpdb->prefix}crawling_results" ); // @codingStandardsIgnoreLine
 
 		wp_cache_set( 'stored_links', $links, 'test_seo_plugin_cache_group' );
 
@@ -84,14 +84,20 @@ class DatabaseManager {
 	public function delete_crawling_results() {
 		global $wpdb;
 
-		$query  = $wpdb->prepare( 'DELETE FROM %s', $this->crawl_table );
-		$result = $wpdb->query( $query ); // @codingStandardsIgnoreLine
+		wp_cache_delete( 'stored_links', 'test_seo_plugin_cache_group' );
+
+		// Use suppress_errors to avoid printing errors directly.
+		$wpdb->suppress_errors();
+		$result = $wpdb->query( "DELETE FROM {$wpdb->prefix}crawling_results" ); // @codingStandardsIgnoreLine
+		$wpdb->suppress_errors( false );
+
 		if ( false !== $result ) {
 			echo 'Crawling results deleted successfully.<br>';
 		} else {
 			$wpdb->print_error();
 		}
 	}
+
 
 	/**
 	 * Store crawling results in the database.

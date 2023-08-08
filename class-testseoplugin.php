@@ -6,7 +6,7 @@
  *
  * Plugin Name: Test SEO Plugin
  * Description: A plugin to improve SEO by crawling internal links.
- * Version: 1.0.1
+ * Version: 1.0.2
  * Author: Muhammad Saeed
  */
 

@@ -43,7 +43,7 @@ class Crawler {
 		$internal_links = $this->extract_internal_links( $url );
 
 		// Store results in the database.
-		$this->store_crawling_results( $internal_links );
+		$db_manager->store_crawling_results( $internal_links );
 
 		// Save home page as .html.
 		if ( ! $this->save_home_page_html( $url ) ) {
@@ -103,22 +103,14 @@ class Crawler {
 	}
 
 	/**
-	 * Store crawling results in the database.
-	 *
-	 * @param array $links An array of links to store.
-	 */
-	private function store_crawling_results( $links ) {
-		$db_manager = Factory::createDatabaseManager();
-		$db_manager->store_crawling_results( $links );
-	}
-
-	/**
 	 * Save the home page content as an HTML file.
 	 *
 	 * @param string $url The URL of the home page.
 	 * @return bool True if the file was saved successfully, false otherwise.
 	 */
 	private function save_home_page_html( $url ) {
+		$wp_filesystem = Factory::get_filesystem();
+
 		// Fetch the home page content.
 		$client  = new Client();
 		$crawler = $client->request( 'GET', $url );
@@ -140,6 +132,8 @@ class Crawler {
 	 * @return bool True if the file was created successfully, false otherwise.
 	 */
 	private function create_sitemap_html( $links ) {
+		$wp_filesystem = Factory::get_filesystem();
+
 		// Generate sitemap structure.
 		$sitemap_content = '<ul>';
 		foreach ( $links as $link ) {

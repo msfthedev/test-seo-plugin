@@ -52,4 +52,24 @@ class Factory {
 		}
 		return self::$db_manager_instance;
 	}
+
+	/**
+	 * Retrieve the WordPress filesystem object.
+	 *
+	 * This function initializes and returns the global $wp_filesystem object,
+	 * which provides a standardized way to perform file system operations in WordPress.
+	 *
+	 * @return WP_Filesystem_Base|null The WordPress filesystem object, or null if initialization failed.
+	 * @since 1.0.0
+	 */
+	public static function get_filesystem() {
+		global $wp_filesystem;
+
+		if ( ! is_object( $wp_filesystem ) ) {
+			require_once ABSPATH . 'wp-admin/includes/file.php';
+			WP_Filesystem();
+		}
+
+		return $wp_filesystem;
+	}
 }

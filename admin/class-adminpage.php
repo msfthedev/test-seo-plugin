@@ -28,10 +28,12 @@ class AdminPage {
 	 * Display the stored links on the admin page.
 	 */
 	public function show_stored_links() {
-		$db_manager   = Factory::createDatabaseManager();
+		$db_manager   = Factory::create_database_manager();
 		$stored_links = $db_manager->get_stored_links();
 
-		if ( ! empty( $stored_links ) ) {
+		if ( empty( $stored_links ) ) {
+			echo '<h2>Sorry, no links there.</h2>';
+		} else {
 			echo '<h2>Crawled Links</h2>';
 			echo '<ul>';
 			foreach ( $stored_links as $link ) {
@@ -45,7 +47,7 @@ class AdminPage {
 	 * Display the admin page content.
 	 */
 	public function show_admin_page() {
-		include_once TEST_SEO_PLUGIN_ROOT . 'crawler/crawler.php';
+		include_once MSFTHEDEV_TEST_SEO_PLUGIN_ROOT . 'crawler/class-crawler.php';
 		$crawler = new Crawler();
 		?>
 		<div class="wrap">
@@ -65,7 +67,7 @@ class AdminPage {
 
 				// Perform crawl on the home page.
 				$home_page_url = get_home_url();
-				$crawl_results = $crawler->crawlWebsite( $home_page_url );
+				$crawl_results = $crawler->crawl_website( $home_page_url );
 
 				$this->show_stored_links();
 
