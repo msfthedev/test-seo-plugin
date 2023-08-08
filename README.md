@@ -1,16 +1,28 @@
-# Package Template
-Repository template for our packages
+# Test SEO Crawl Plugin for WordPress
 
-# Usage
-When creating a new repository for a package or a plugin, select this repository as the template. It will initialize the new repository with all the structure & files contained in the template.
+This WordPress plugin is a test plugin to assists administrators in improving their website's SEO rankings. The solution enables administrators to initiate a crawl of their website's internal hyperlinks, view the results, and generate a sitemap for manual analysis.
 
-# Content
-* `bin/install-wp-tests.sh`: installer for WordPress tests suite
-* `.editorconfig`: config file for your IDE to follow our coding standards
-* `.gitattributes`: list of directories & files excluded from export
-* `.gitignore`: list of directories & files excluded from versioning
-* `.travis.yml`: Travis-CI configuration file
-* `composer.json`: Base composer file to customize for the project
-* `LICENSE`: License file using GPLv3
-* `phpcs.xml`: Base PHP Code Sniffer configuration file to customize for the project
-* `README.md`: The readme displayed on Github, to customize for the project
+Check Explanation.md for details.
+
+## Installation
+
+- Clone the repo in 
+	/wp-content/plugins
+	
+- Run 
+`composer install`
+
+## Usage
+
+- Activate the 'Test SEO Plugin'
+- Click the 'Test SEO' option from the menu.
+- Click either the 'Trigger Crawl' to run a fresh crawl or click the 'Show Last Crawled Links' button to see the links.
+
+## Contribution
+
+Contributions are welcome! Feel free to submit issues and pull requests.
+
+## License
+
+This project is licensed under the [MIT License](link-to-license).
+
