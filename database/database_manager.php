@@ -2,7 +2,7 @@
 namespace MsfTheDev\TestSeoPlugin\Database;
 
 class DatabaseManager {
-    private $crawl_table='';
+    private $crawl_table = '';
 
     public function __construct() {
         global $wpdb;

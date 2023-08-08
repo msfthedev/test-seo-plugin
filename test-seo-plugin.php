@@ -2,14 +2,15 @@
 /**
  * Plugin Name: Test SEO Plugin
  * Description: A plugin to improve SEO by crawling internal links.
- * Version: 1.0
- * Author: Your Name
+ * Version: 1.0.1
+ * Author: Muhammad Saeed
  */
 namespace MsfTheDev\TestSeoPlugin;
 
 define('TEST_SEO_PLUGIN_ROOT', plugin_dir_path(__FILE__));
 
 use MsfTheDev\TestSeoPlugin\Admin\AdminPage;
+use MsfTheDev\TestSeoPlugin\Crawl\Crawler;
 
 require_once(plugin_dir_path(__FILE__) . 'factory.php');
 use MsfTheDev\TestSeoPlugin\Factory;
@@ -24,8 +25,23 @@ class Plugin {
 
         // Hook to add admin menu
         add_action('admin_menu', array($this, 'add_admin_page'));
+
+        // Schedule the crawlWebsite event to run hourly
+        if (!wp_next_scheduled('crawl_website_event')) {
+            wp_schedule_event(time(), 'hour', 'crawl_website_event');
+        }
+        add_action('crawl_website_event', array($this, 'crawl_website_callback'));		
     }
 
+    // Callback function to be executed when the event is triggered
+    public function crawl_website_callback() {
+        include_once( TEST_SEO_PLUGIN_ROOT . 'crawler/crawler.php');
+        $crawler = new Crawler();
+		
+        $home_page_url = get_home_url();
+        $crawl_results = $crawler->crawlWebsite($home_page_url);
+    }
+	
     // Activation Hook
     public function activate() {
         // Perform activation tasks if needed
