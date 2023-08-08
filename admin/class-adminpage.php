@@ -2,7 +2,7 @@
 /**
  * Admin Page class file.
  *
- * This file contains the AdminPage class responsible for displaying crawled links and managing admin page functionality.
+ * This file contains the AdminPage class responsible for running on-demand crawl and displaying crawled links.
  *
  * @package MsfTheDev\TestSeoPlugin\Admin
  */
